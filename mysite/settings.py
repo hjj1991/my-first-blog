@@ -91,7 +91,7 @@ DATABASES = {
     #     'driver_supports_utf8' : True,
         },
     }
-}
+
 
 
 # Password validation
