@@ -1,6 +1,11 @@
-from django.conf.urls import url
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.post_list, name='post_list'),
+	path('', views.home, name='home'),
+	path('post_list/', views.post_list, name='post_list'),
+	path('post_list/<int:post_id>', views.post_detail, name="post_detail"),
+	path('post_list/<int:post_id>/comment/create', views.add_comment_to_post, name="add_comment_to_post"),
+	path('post_list/<int:post_id>/comment/remove', views.comment_remove, name="comment_remove"),
+
 ]
