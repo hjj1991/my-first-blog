@@ -65,6 +65,13 @@
     </div>
         </div>
         <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4"></div>
+          <div class="col-4" style="text-align:right">
+            <a href="{% url 'post_new' %}"  ><button style="margin-bottom:10px;" class="save btn btn-default">글쓰기</button></a>
+          </div>
+        </div>
+        <div class="row">
             {% for post in posts %}
              <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                  <div id="info_box"><a href="{% url 'post_detail' post_id=post.pk %}">

@@ -4,7 +4,7 @@
         <link href="https://fonts.googleapis.com/earlyaccess/notosanskr.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/Styles.css' %}">
         <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
@@ -73,7 +73,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav col-10">
-                <a class="nav-item nav-link" href=" {% url 'post_list' %}">갤러리</a>
+                <a class="nav-item nav-link" href=" {% url 'post_list' %}">게시판</a>
                 <a class="nav-item nav-link" href="#"> 수업 목록</a>
             </div>
             {% if user.is_authenticated %}
