@@ -27,7 +27,9 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['10.131.109.56']
+#ALLOWED_HOSTS = ['10.131.109.56']
+ALLOWED_HOSTS = ['127.0.0.1']
+
 
 
 # Application definition
