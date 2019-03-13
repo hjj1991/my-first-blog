@@ -5,6 +5,11 @@
     <h1 style="color:black">제목: {{post.title}} </h1>
     <p>글쓴이: {{post.author}} 날짜: {{post.created_date}}</p>
     <p>내용: {{post.text}}</p>
+    {% if post.photo %}
+    <p>path : {{post.photo.path}}</p>
+    <p>url : {{post.photo.url}}</p>
+    <img src="{{ post.photo.url }}" alt="">
+    {% endif %} 
 {% for comment in post.comments.all %}
     <div class="comment">
         <div class="date">{{ comment.created_date }} 
