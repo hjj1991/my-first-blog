@@ -1,13 +1,21 @@
 {% extends 'blog/base.html' %}
 {% load imagekit %}
-
+{% load static %}
 {% block content %}
-    <h1>New post</h1>
+	<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+	<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
     <div class="container">
 	    <form method="POST" enctype="multipart/form-data" >
 	    	{% csrf_token %}
-	        {{ form.as_p }}
-	        <button type="submit" class="save btn btn-default">Save</button>
+	    	<div class="row">
+	    		<div class="col-12 col-md-12 col-lg-12 col-xl-12" >
+	    			<a class="menu_header" href=" {% url 'post_list' %}"> 게시판 </a>
+	        		{% for field in form %}
+	        		<div class="post_edit">{{field}}</div>
+	        		{% endfor %}
+
+	        		<button type="submit" class="save btn btn-default">Save</button>
+			</div>
 	    </form>
 	</div>
 {% endblock %}

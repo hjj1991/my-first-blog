@@ -3,23 +3,24 @@ from django.utils import timezone
 
 from imagekit.models import ProcessedImageField
 from imagekit.processors import Thumbnail
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    content = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
     #photo = models.ImageField(blank=True, upload_to="blog/%Y/%m/%d")
-    photo = ProcessedImageField(
-        upload_to = 'blog/post/%Y/%m/%d',
-        processors = [Thumbnail(100, 100)], # 처리할 작업 목룍
-        format = 'JPEG',                    # 최종 저장 포맷
-        options = {'quality': 60},
-        blank=True, null=True)          # 저장 옵션
+    # photo = ProcessedImageField(
+    #     upload_to = 'blog/post/%Y/%m/%d',
+    #     processors = [Thumbnail(100, 100)], # 처리할 작업 목룍
+    #     format = 'JPEG',                    # 최종 저장 포맷
+    #     options = {'quality': 60},
+    #     blank=True, null=True)          # 저장 옵션
 
     def publish(self):
         self.published_date = timezone.now()

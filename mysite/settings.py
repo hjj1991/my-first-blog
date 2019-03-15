@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
     'imagekit',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -82,23 +84,23 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'mysite_django',
-        'USER': 'sa',
-        'PASSWORD': 'wowjddl1',
-        'HOST': 'localhost',
-        'PORT': '1433',
-        'OPTIONS': {
-        'driver' : 'SQL Server Native Client 11.0',
-        'MARS_Connection' : True,
-        'driver_supports_utf8' : True,
-    },
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # 'default': {
+    #     'ENGINE': 'sql_server.pyodbc',
+    #     'NAME': 'mysite_django',
+    #     'USER': 'sa',
+    #     'PASSWORD': 'wowjddl1',
+    #     'HOST': 'localhost',
+    #     'PORT': '1433',
+    #     'OPTIONS': {
+    #     'driver' : 'SQL Server Native Client 11.0',
+    #     'MARS_Connection' : True,
+    #     'driver_supports_utf8' : True,
+    # },
     
-}
+    }
 }
 
 
@@ -146,3 +148,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'basic',
+        'height': 600,
+        'width': '100%',
+    },
+}
