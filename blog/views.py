@@ -13,8 +13,14 @@ def home(request):
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-    return render(request, 'blog/post_list.html', {'posts': posts})
+	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+	for post in posts:
+		if post.content.find('src="') != -1:
+			post_content_start = post.content.find('src="') + 5
+			post_content_end = post.content.find('" style')
+			post_thumbnail = post.content[post_content_start:post_content_end]
+			post.thumbnail = post_thumbnail
+	return render(request, 'blog/post_list.html', {'posts': posts })
 
 
 def post_detail(request, post_id):

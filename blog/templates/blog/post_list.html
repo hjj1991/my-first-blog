@@ -72,15 +72,20 @@
           </div>
         </div>
         <div class="row">
-            {% for post in posts %}
-             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                 <div id="info_box"><a href="{% url 'post_detail' post_id=post.pk %}">
-                     <img src="{% static 'images/course1.jpg' %}"  width="100%">
-                     <div id="user">
-                     <p>{{ post.title|truncatewords:4 }}</p>
-                     <img  src="{% static 'images/user.png' %}"><span> {{post.author}} <p>{{ post.published_date }}</p></span></div>
-                 </a></div>
-                 </div>
+          {% for post in posts %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+              <div id="info_box"><a href="{% url 'post_detail' post_id=post.pk %}">
+                {% if post.thumbnail %}
+                  <img src="{{ post.thumbnail }}"  width="100%">
+                {% else %}
+                  <img src="{% static 'images/not_image.jpg' %}"  width="100%">
+                {% endif %}
+                  <div id="user">
+                    <p>{{ post.title|truncatewords:4 }}</p>
+                    <img  src="{% static 'images/user.png' %}"><span> {{post.author}} <p>{{ post.published_date }}</p></span></div>
+                 </a>
+               </div>
+            </div>
             {% endfor %}
         </div>
     </div>
