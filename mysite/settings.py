@@ -147,6 +147,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#세션 브라우저 close 시 끊김 설정
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
