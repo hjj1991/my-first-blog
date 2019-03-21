@@ -17,7 +17,7 @@ def post_list(request):
 	for post in posts:
 		if post.content.find('src="') != -1:
 			post_content_start = post.content.find('src="') + 5
-			post_content_end = post.content.find('" style')
+			post_content_end = post_content_start + post.content[post_content_start:].find('"')
 			post_thumbnail = post.content[post_content_start:post_content_end]
 			post.thumbnail = post_thumbnail
 	return render(request, 'blog/post_list.html', {'posts': posts })
