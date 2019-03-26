@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -12,15 +14,90 @@ def home(request):
 	return render(request, 'blog/home.html')
 
 
-def post_list(request):
-	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
-	for post in posts:
-		if post.content.find('src="') != -1:
-			post_content_start = post.content.find('src="') + 5
-			post_content_end = post_content_start + post.content[post_content_start:].find('"')
-			post_thumbnail = post.content[post_content_start:post_content_end]
-			post.thumbnail = post_thumbnail
-	return render(request, 'blog/post_list.html', {'posts': posts })
+class PostListView(ListView):  
+    model = Post
+    template_name = "blog/post_list.html"
+    context_object_name = 'posts'
+    paginate_by = 10  # Display 10 objects per page
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+
+        search_text = request.GET.get('search_text', '')
+        search_type = request.GET.get('search_type', '')
+        if search_text:
+            if search_type == 'tnc':
+                self.object_list = self.object_list.filter(title__icontains=search_text)
+            elif search_type == 'title':
+                self.object_list = self.object_list.filter(title__icontains=search_text)
+            elif search_type == 'content':
+                self.object_list = self.object_list.filter(content__icontains=search_text)
+            elif search_type =='nickname':
+                self.object_list = self.object_list.filter(content__icontains=search_text)
+            else:
+                self.render_to_response(context)
+
+
+        for post in self.object_list:
+            if post.content.find('src="') != -1:
+                post_content_start = post.content.find('src="') + 5
+                post_content_end = post_content_start + post.content[post_content_start:].find('"')
+                post_thumbnail = post.content[post_content_start:post_content_end]
+                post.thumbnail = post_thumbnail  
+        context = self.get_context_data()
+
+        return self.render_to_response(context)
+
+
+
+    def get_queryset(self): 
+        queryset = super(PostListView, self).get_queryset()
+        queryset = queryset.filter(published_date__lte=timezone.now()).order_by('-published_date')
+        for post in queryset:
+            if post.content.find('src="') != -1:
+                post_content_start = post.content.find('src="') + 5
+                post_content_end = post_content_start + post.content[post_content_start:].find('"')
+                post_thumbnail = post.content[post_content_start:post_content_end]
+                post.thumbnail = post_thumbnail     
+        return queryset
+
+
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        paginator = context['paginator']
+        page_numbers_range = 10  # Display only 5 page numbers
+        max_index = len(paginator.page_range)
+
+        page = self.request.GET.get('page')
+        current_page = int(page) if page else 1
+
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
+
+        page_range = paginator.page_range[start_index:end_index]
+        context['page_range'] = page_range
+        # context['posts'] = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+
+        # for post in context['posts']:
+        #     if post.content.find('src="') != -1:
+        #         post_content_start = post.content.find('src="') + 5
+        #         post_content_end = post_content_start + post.content[post_content_start:].find('"')
+        #         post_thumbnail = post.content[post_content_start:post_content_end]
+        #         post.thumbnail = post_thumbnail
+        return context
+
+
+# def post_list(request):
+# 	posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
+# 	for post in posts:
+# 		if post.content.find('src="') != -1:
+# 			post_content_start = post.content.find('src="') + 5
+# 			post_content_end = post_content_start + post.content[post_content_start:].find('"')
+# 			post_thumbnail = post.content[post_content_start:post_content_end]
+# 			post.thumbnail = post_thumbnail
+# 	return render(request, 'blog/post_list.html', {'posts': posts })
 
 
 def post_detail(request, post_id):

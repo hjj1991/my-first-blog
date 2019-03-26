@@ -7,7 +7,7 @@ body {
     justify-content : flex-end;
     padding-right: 0px;
 }
-/* 크루셀 시작 */
+
 
 .carousel-caption {
   box-sizing: border-box;
@@ -71,13 +71,13 @@ h2 {
     height: 400px;    
 }
 
-/* 경보 시작 */
+
 .alert.alert-warning.alert-dismissible.fade.show {
     margin-top: 50px;
     margin-bottom: 16px;
 }
 
-/* 그리드 시작 */
+
 
 .col-12.col-md-6.col-lg-4.col-xl-3 {
     padding: 0;
@@ -130,4 +130,15 @@ h2 {
 }
 .menu_header {
     font-size: 32px;
+}
+ 
+
+
+.pagination {
+    display: inline-block;
+    text-align: center;
+}
+
+.pagination li {
+    display: inline-block;
 }
