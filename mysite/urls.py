@@ -22,10 +22,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest-api/', include('rest_framework.urls')),
     # path('accounts/login/', views.LoginView.as_view(), name='login'),
     # url(r'^accounts/logout/$', views.LogoutView.as_view(template_name="blog/home.html"), name='logout', kwargs={'next_page': '/'}),
     path('', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
     path('polls/', include('polls.urls')),
+    path('score/', include('score.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

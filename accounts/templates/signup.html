@@ -1,10 +1,5 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    {% if errors %}
-    <script type="text/javascript">
-      alert('{{ errors }}');
-    </script>
-    {% endif %}
 {% if user.is_authenticated %}
 <script type="text/javascript">
   alert('잘못된 접근입니다. \n회원가입을 위해서는 로그아웃이 필요합니다.')
@@ -14,11 +9,16 @@
 <div class="container"> 
 <form method="POST" action="" class="sign-up-form">
   {%csrf_token%}
-  <h2 class="sub-title"> 회원가입 </h2>
+  <div style="font-size: 50px; font-weight: bold; margin-bottom: 25px;">회원가입</div>
   {% for field in form %}
       <div class="form-group">
         {{ field.label }}
         {{field}}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <span class="help-block" style="color: red;">{{ error }}</span>
+          {% endfor %}
+        {% endif %}      
       </div>
   {% endfor %}
   <button type="submit" class="save btn btn-success">회원가입</button>

@@ -142,3 +142,46 @@ h2 {
 .pagination li {
     display: inline-block;
 }
+
+.container {
+    margin-top: 50px;
+}
+
+@media only screen and (max-width: 800px) {
+    table td:nth-child(1), 
+    table th:nth-child(1) {display: none;}
+}
+ 
+@media only screen and (max-width: 640px) {
+    #unseen .table .table-hover td:nth-child(4),
+    #unseen .table .table-hover table th:nth-child(4),
+    #unseen .table .table-hover table td:nth-child(7),
+    #unseen .table .table-hover table th:nth-child(7),
+    #unseen .table .table-hover table td:nth-child(8),
+    #unseen .table .table-hover table th:nth-child(8){display: none;}
+}
+
+.comment .row {
+    background-color: #f8f9fa;
+}
+
+.comment-date {
+    text-align: right;
+}
+
+.board_name {
+    background-color: #f8f9fa;
+}
+
+.board_content {
+    padding-bottom: 100px;
+    border-bottom: 1px solid gray;
+}
+
+.board_content .title {
+    margin-bottom: 10px;
+}
+
+.row {
+    margin: 0px;
+}

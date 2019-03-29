@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block title %}갤러리 {% endblock %}
 {% block content %}
 
@@ -68,19 +69,10 @@ function validateForm()
 <!-- 그리드 시작 -->    
 
     <div class="container">  
-        <div class="row">
-            <div class="col-12">
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>튜터 모집!</strong> 재능을 나누어봐요.
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    </div>
-        </div>
+ 
         <div class="row">
           <div class="col-lg-4">
-            <form method="get" name="search_form" action="{% url 'post_list' %}" onsubmit="return validateForm();">
+            <form method="get" name="search_form" action="{% url 'board_list' %}" onsubmit="return validateForm();">
               <input type="hidden" name="mode" value="{{mode}}">
               <div class="input-group">
               <select class="custom-select" name="search_type">
@@ -96,28 +88,36 @@ function validateForm()
           </div>
           </form>
           </div>
-          <div class="col-4" style="text-align:right">
+          <div class="col-4"></div>
+          <div class="col-lg-4" style="text-align:right">
             {% if user.is_authenticated %}
               <a href="{% url 'post_new' mode %}"  ><button style="margin-bottom:10px;" class="save btn btn-default">글쓰기</button></a>
             {% endif %}
           </div>
         </div>
         <div class="row">
-          {% for post in posts %}
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-              <div id="info_box"><a href="{% url 'post_detail' post_id=post.pk %}">
-                {% if post.thumbnail %}
-                  <img src="{{ post.thumbnail }}"  width="100%">
-                {% else %}
-                  <img src="{% static 'images/not_image.jpg' %}"  width="100%">
-                {% endif %}
-                  <div id="user">
-                    <p>{{ post.title|truncatewords:4 }}</p>
-                    <img  src="{% static 'images/user.png' %}"><span> {{post.author}} <p>{{ post.published_date|date:"Y-m-d a f"  }}</p></span></div>
-                 </a>
-               </div>
-            </div>
-            {% endfor %}
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 5% " scope="col">No.</th>
+                  <th style="width: 50%; text-align: center;" scope="col">제목</th>
+                  <th style="width: 15%" scope="col">작성자</th>
+                  <th style="width: 25%; text-align: center;" scope="col">날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for post in posts %}
+                <tr>
+                  <td style="text-align: center;">{{ posts.count|add:"1"|sub:forloop.counter }}</td>
+                  <td style="text-align: center;"><a href="{% url 'post_detail' post_id=post.pk %}">{{ post.title|truncatewords:10 }}</a></td>
+                  <td>{{ post.author }}</td>
+                  <td style="text-align: center;">{{ post.published_date|date:"Y-m-d a f" }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
         </div>
 <!-- 페이징 시작-->
         <div align="center">

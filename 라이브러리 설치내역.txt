@@ -5,3 +5,5 @@ django-ckeditor    --텍스트에디터
 $ pip install pillow # django-imagekit 사용을 위해서 사전 설치 필요
 $ pip install pilkit # django-imagekit 사용을 위해서 사전 설치 필요
 $ pip install django-imagekit
+$ pip install djangorestframework
+$ pip install django-mathfilters 템플릿태그 산술연산사용가능

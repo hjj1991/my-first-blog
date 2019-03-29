@@ -1,24 +1,53 @@
 {% extends 'blog/base.html' %}
 {% block title %} {{post.title}} - 잡다창고{% endblock %}
 {% block content %}
+<script type="text/javascript">
+    function removeCheck(){
+        if(confirm("정말 삭제하시겠습니까??") == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+</script>
 <div class="container"> 
-    <h1 style="color:black">제목: {{post.title}} </h1>
-    <p>글쓴이: {{post.author}} </p>
-    <p>날짜: {{post.created_date}}</p>
-    <p>{{post.content |safe}}</p>
+    <div class="board_content">
+        <div class="title">
+            <h1 style="color:black">{{post.title}} </h1>
+        </div>
+    <div class="board_name row">
+        <div class="col">
+            글쓴이: {{post.author}}
+        </div>
+        <div class="comment-date col-8">
+            {{post.created_date|date:"Y-m-d a f"}}
+        </div>
+    </div>
+        <p>{{post.content |safe}}</p>
+    </div>
 {% for comment in post.comments.all %}
     <div class="comment">
-        <div class="date">{{ comment.created_date }} 
-        {% if comment.author == user.username %}
-            <form method="POST" class="post-form" action="{% url 'comment_remove' post_id=post.pk %}">
+        <div class="row" {% if comment.author == user.username %} style="background-color: #AEDBFD;" {% endif %}>
+            <div class="col">
+                <strong> {{comment.author}} </strong>
+            </div>
+            <div class="comment-date col-8">
+                {{ comment.created_date|date:"Y-m-d a f" }} 
+            </div>
+        </div>
+        <p> {{comment.text|linebreaks}} </p>
+                {% if comment.author == user.username %}
+            <form method="POST" class="post-form" name="reply" action="{% url 'comment_remove' post_id=post.pk %}" onsubmit="return removeCheck()">
                 {% csrf_token %}
                 <input type="hidden" name="del_comment_indx" value="{{ comment.pk }}">
-                <button type="submit" class="save btn btn-default">Delete</button>
+                <div style="text-align: right;"><button type="submit"  class="save btn btn-default"> 삭제</button></div>
             </form>
         {% endif %}
-        </div>
-        <strong> {{comment.author}} </strong>
-        <p> {{comment.text|linebreaks}} </p>
     </div>
 {% empty %}
     <p> 댓글이 없습니다.</p>
@@ -28,9 +57,10 @@
     <form method="POST" class="post-form" action="{% url 'add_comment_to_post' post_id=post.pk %}">
         {% csrf_token %}
         <input type="hidden" name="author" value="{{ user.username }}">
-        <input name="text" type="textarea" value="">   
-        <button type="submit" class="save btn btn-default">Send</button>
+        <textarea class="form-control" name="text" ></textarea>    
+        <div style="text-align: right; margin-top: 5px;"><button type="submit" class="save btn btn-default">등록</button></div>
     </form>
 {% endif %}
 </div>
 {% endblock %}
+

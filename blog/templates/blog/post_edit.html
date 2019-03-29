@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load imagekit %}
 {% load static %}
-{% block title %}갤러리 {% endblock %}
+{% block title %}게시판 {% endblock %}
 {% block content %}
 	<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
 	<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
@@ -10,7 +10,7 @@
 	    	{% csrf_token %}
 	    	<div class="row">
 	    		<div class="col-12 col-md-12 col-lg-12 col-xl-12" >
-	    			<a class="menu_header" href=" {% url 'post_list' %}"> 갤러리 </a>
+	    			<a class="menu_header" href=" {% url 'post_list' %}"> 게시판 </a>
 	        		{% for field in form %}
 	        		<div class="post_edit">{{field}}</div>
 	        		{% endfor %}

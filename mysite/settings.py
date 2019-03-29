@@ -44,10 +44,25 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
+    'score.apps.ScoreConfig',
+    # 이미지 가공툴,ckeditor
     'imagekit',
     'ckeditor',
     'ckeditor_uploader',
+
+    # REST framework
+    'rest_framework',
+
+    #탬플릿태그 산술연산
+    'mathfilters',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAdminUser',
+    ],
+    #'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

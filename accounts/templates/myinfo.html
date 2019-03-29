@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% if not user.is_authenticated %}
+<script type="text/javascript">
+  alert('잘못된 접근입니다. \n정보수정을 위해서는 로그인이 필요합니다.')
+  window.location.href = '/';
+</script>
+{% else %}
+
+{% endif %}
+{% for user_in in user_info %}
+<div class="container">
+아이디: {{ user_in.username }} <br>
+{% if user.username == user_in.username %}
+이메일주소: {{ user_in.email }} <br>
+이름: {{user_in.first_name|add:user_in.last_name}} <br>
+가입일: {{user_in.date_joined |date:"Y-m-d a f" }} <br>
+최근로그인: {{user_in.last_login|date:"Y-m-d a f" }}
+{% endif %}
+</div>
+
+{% endfor %}
+{% endblock %}
