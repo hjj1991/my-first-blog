@@ -27,8 +27,8 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['10.131.109.56']
-#ALLOWED_HOSTS = ['127.0.0.1']
+#ALLOWED_HOSTS = ['10.131.109.56']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'polls.apps.PollsConfig',
     'score.apps.ScoreConfig',
+    'reservation.apps.ReservationConfig',
     # 이미지 가공툴,ckeditor
     'imagekit',
     'ckeditor',

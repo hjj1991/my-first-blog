@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}예약{% endblock %}
+{% block content %}
+<script type="text/javascript">
+$(function(){
+  $('#dateRangePicker').datepicker({
+    startDate: '+1d', 
+    endDate: '+5d', 
+    format: "yyyy-mm-dd",
+    language: "kr"
+  })
+
+  $('#dateRangePicker').datepicker('update', '{{ date }}');
+
+  $('#dateRangePicker').on('changeDate', function() {
+    var date = $('#dateRangePicker').datepicker('getFormattedDate')
+    $(location).attr('href',"{% url 'reservation:reservation_view' %}?date="+date);
+  });
+});
+</script>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-6" style="margin: auto; " id="dateRangePicker"> </div>
+        {% if date %}
+          <div style="margin: auto;" class="col-md-6 col-12">
+            <div class="row">
+              <div class="col-12" style="text-align: center;">{{ date }}일 예약가능시간</div>
+              <div style="margin: auto; text-align: center;" class="col-12">
+                {% for able in ablelist %}
+                  <a href="{% url 'reservation:reservation_reg' %}?date={{ date }}&time={{ able }}"><button style="margin:5px;" class="save btn btn-default">{{ able }}:00</button></a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+          </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

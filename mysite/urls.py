@@ -29,5 +29,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('polls/', include('polls.urls')),
     path('score/', include('score.urls')),
+    path('reservation/', include('reservation.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

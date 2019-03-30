@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<style type="text/css">
+#id_variety {
+  list-style: none;
+  padding: 10px;
+}
+</style>
+<div class="container"> 
+<form method="POST" action="" >
+  {%csrf_token%}
+  <input type="hidden" name="date" value="{{date}}">
+  <input type="hidden" name="time" value="{{time}}">
+  <div style="font-size: 50px; font-weight: bold; margin-bottom: 25px;">예약등록</div>
+  <div style="font-size: 20px; font-weight: bold; margin-bottom: 25px;">예약일시:{{date}} {{time}}:00</div>
+  {% for field in form %}
+      <div class="form-group">
+        {{ field.label }}
+        {{field}}
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <span class="help-block" style="color: red;">{{ error }}</span>
+          {% endfor %}
+        {% endif %}      
+      </div>
+  {% endfor %}
+  <button type="submit" class="save btn btn-success">예약등록</button>
+  <a href="{% url 'reservation:reservation_view' %}">
+    <button type="button" class="btn btn-danger">취소</button>
+  </a>
+</form>
+</div>
+{% endblock %}
