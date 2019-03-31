@@ -28,7 +28,8 @@ DEBUG = True
 #ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 #ALLOWED_HOSTS = ['*']
 #ALLOWED_HOSTS = ['10.131.109.56']
-ALLOWED_HOSTS = ['127.0.0.1']
+#ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['211.217.41.72']
 
 
 
@@ -153,6 +154,17 @@ USE_L10N = True
 USE_TZ = True
 
 # LOGIN_REDIRECT_URL = '/'
+
+# settings.py
+...
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '' # ex) bum752@gmail.com
+EMAIL_HOST_PASSWORD = '' # ex) P@ssw0rd
+SERVER_EMAIL = '' # ex) bum752@gmail.com
+DEFAULT_FROM_MAIL = '' # ex) bum752
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

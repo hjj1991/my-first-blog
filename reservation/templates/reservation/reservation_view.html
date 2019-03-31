@@ -5,8 +5,9 @@
 <script type="text/javascript">
 $(function(){
   $('#dateRangePicker').datepicker({
+    daysOfWeekDisabled: [2, 3],
     startDate: '+1d', 
-    endDate: '+5d', 
+    endDate: '+30d', 
     format: "yyyy-mm-dd",
     language: "kr"
   })
