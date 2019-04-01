@@ -31,7 +31,7 @@ $(function(){
               <div class="col-12" style="text-align: center;">{{ date }}일 예약가능시간</div>
               <div style="margin: auto; text-align: center;" class="col-12">
                 {% for able in ablelist %}
-                  <a href="{% url 'reservation:reservation_reg' %}?date={{ date }}&time={{ able }}"><button style="margin:5px;" class="save btn btn-default">{{ able }}:00</button></a>
+                  <a href="{% url 'reservation:reservation_reg' %}?date={{ date }}&time={{ able }}:00"><button style="margin:5px;" class="save btn btn-default">{{ able }}:00</button></a>
                 {% endfor %}
               </div>
             </div>

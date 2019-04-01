@@ -59,20 +59,19 @@ def reservaiton_send(request):
 def reservation_view(request):
 	if request.method == "GET":
 		reservation_date = request.GET.get('date', '')
-		reservation_list = Reservation.objects.filter(reservation_date=reservation_date)
-		ablelist = []
-		reservation = []
+		if reservation_date != '':
+			reservation_list = Reservation.objects.filter(reservation_date=reservation_date)
+			ablelist = []
+			reservation = []
 
-		for a in reservation_list:
-			reservation.append(a.reservation_time)
+			for a in reservation_list:
+				reservation.append(a.reservation_time)
 
 
-		for a in range(11, 21):
-			if a not in reservation:
-				ablelist.append(a)
-
-				
-		return render(request, 'reservation/reservation_view.html', {'ablelist' : ablelist, 'date' : reservation_date })
+			for a in range(11, 21):
+				if a not in reservation:
+					ablelist.append(a)
+			return render(request, 'reservation/reservation_view.html', {'ablelist' : ablelist, 'date' : reservation_date })
 
 	return render(request, 'reservation/reservation_view.html')
 
@@ -98,7 +97,7 @@ def reservation_reg(request):
 
 				url = "https://notify-api.line.me/api/notify"
 
-				resrvation_message = "\n예약일자: " + reserv_reg.reservation_date + " " + reserv_reg.reservation_time + ":00 \n예약자: " + reserv_reg.name +"\n전화번호: " + reserv_reg.phone_num + "\n예약종류: " + vari
+				resrvation_message = "\n예약일자: " + reserv_reg.reservation_date + " " + reserv_reg.reservation_time + ":00 \n예약자: " + reserv_reg.name +"\n전화번호: " + reserv_reg.phone_num + "\n예약종류: " + vari + "\n요청사항: " + reserv_reg.request_text
 
 				payload = {
 						"message": resrvation_message

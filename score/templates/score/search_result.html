@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}전적검색{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+    	<div class="col-lg-12">
+    		<form method="get" name="search_form" action="{% url 'score:search_result' %}" >
+				<div class="input-group">
+              	<input type="text" class="form-control" placeholder="소환사명" name="search_text"  value="{{search_text}}">
+             	<span class="input-group-btn">
+              		<button class="btn btn-secondary" type="submit">검색</button>
+            	</span>
+          		</div>
+          	</form>
+        </div>
+    </div>
+    <div class="row">
+      <div style="margin: 20 0 20 0px;" class="col-12">
+        소환사명:{{ summoners_result.name }}<br> 
+        LV: {{ summoners_result.level }}
+      </div>
+    </div>
+    <div class="row">
+      <div  class="col-6">
+        {% if solo_tier %}
+        <div class="row">
+          <div class="col-3">
+            <img src="{% static 'images/emblems/Emblem_' %}{{solo_tier.tier}}.png"  width="100%">
+          </div>
+          <div>
+          리그: {{ solo_tier.rank_type }}<br>
+          티어: {{ solo_tier.tier }} {{ solo_tier.rank }}<br>
+          포인트: {{ solo_tier.points }}<br>
+          전적: {{ solo_tier.wins|add:solo_tier.losses}}전 {{ solo_tier.wins }}승 {{ solo_tier.losses }}패
+        </div>
+      </div>
+      {% else %}
+        배치&전적정보없음
+      {% endif %}
+      </div>
+      <div class="col-6">
+        {% if team_tier %}
+        <div class="row">
+          <div class="col-3">
+            <img src="{% static 'images/emblems/Emblem_' %}{{team_tier.tier}}.png"  width="100%">
+          </div>
+          <div>
+          리그: {{ team_tier.rank_type }}<br>
+          티어: {{ team_tier.tier }} {{ team_tier.rank }}<br>
+          포인트: {{ team_tier.points }}<br>
+          전적: {{ team_tier.wins|add:team_tier.losses}}전 {{ team_tier.wins }}승 {{ team_tier.losses }}패
+          </div>
+          {% else %}
+          배치&전적정보없음
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+

@@ -7,8 +7,9 @@ from django.utils import timezone
 class Reservation(models.Model):
 	name = models.CharField(max_length=50)
 	phone_num = models.CharField(max_length=50)
-	reservation_date = models.CharField(max_length=50)
-	reservation_time = models.IntegerField()
+	reservation_date = models.DateField()
+	reservation_time = models.TimeField()
+	request_text = models.TextField()
 	variety = models.IntegerField()
 	reg_date = models.DateTimeField(
             default=timezone.now)
