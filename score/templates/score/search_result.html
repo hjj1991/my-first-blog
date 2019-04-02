@@ -16,17 +16,21 @@
           	</form>
         </div>
     </div>
-    <div class="row">
-      <div style="margin: 20 0 20 0px;" class="col-12">
-        소환사명:{{ summoners_result.name }}<br> 
-        LV: {{ summoners_result.level }}
-      </div>
+
+    <div class="row" style="margin: 40px; float: none;">
+
+        <img style="display: block; margin: 0px" class="img-thumbnail" src="{% static 'images/profileicon/' %}{{summoners_result.profileIconId}}.png">
+        <span style="margin: 20 0 0 20; font-size: 32px;">{{ summoners_result.name }}<br>
+          <span style="font-size: 20px; ">LV: {{ summoners_result.level }}</span>
+        </span>
+
+
     </div>
     <div class="row">
-      <div  class="col-6">
+      <div style="float: none; margin: 0 auto" class="col-5 border border-secondary">
         {% if solo_tier %}
         <div class="row">
-          <div class="col-3">
+          <div class="col-4">
             <img src="{% static 'images/emblems/Emblem_' %}{{solo_tier.tier}}.png"  width="100%">
           </div>
           <div>
@@ -40,10 +44,11 @@
         배치&전적정보없음
       {% endif %}
       </div>
-      <div class="col-6">
+
+      <div style="float: none; margin: 0 auto" class="col-5 border border-secondary">
         {% if team_tier %}
         <div class="row">
-          <div class="col-3">
+          <div class="col-4">
             <img src="{% static 'images/emblems/Emblem_' %}{{team_tier.tier}}.png"  width="100%">
           </div>
           <div>
@@ -57,7 +62,17 @@
           {% endif %}
         </div>
       </div>
-    </div>
+      </div>
+          <div class="row">
+            {% for a in game_list2 %}
+            <div class="col-12">
+              <img src="{% static 'images/champ/' %}{{a.champion}}.png"><br>
+            </div>
+            {% endfor %}
+        </div>
+    
+</div>
+
 
 </div>
 

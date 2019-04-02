@@ -15,6 +15,8 @@ def search_result(request):
 		solo_tier = {}
 		team_tier = {}
 		store_list = []
+		game_list ={}
+		game_list2 = []
 
 
 		summoner_url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + str(summoner_name)	#소환사 정보 검색
@@ -24,6 +26,17 @@ def search_result(request):
 		if summoners_result:
 			sum_result['name'] = summoners_result['name']
 			sum_result['level'] = summoners_result['summonerLevel']
+			sum_result['profileIconId'] = summoners_result['profileIconId']
+
+			game_url = "https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/" + summoners_result['accountId']	#최근 10경기 정보
+			params1 = {'api_key': 'RGAPI-00acf972-10de-4381-8a1c-4c41b0cf7692', 'endIndex':'10'}
+			game_list = requests.get(game_url, params=params1)
+			game_list = json.loads(((game_list.text).encode('utf-8')))
+			game_list = game_list['matches']
+			if len(game_list) > 1:
+				for item in game_list:
+					game_list2.append(item)
+
 
 
 
@@ -71,4 +84,4 @@ def search_result(request):
 
 
 
-		return render (request, 'score/search_result.html', {'summoners_result': sum_result, 'solo_tier': solo_tier, 'team_tier': team_tier})
+		return render (request, 'score/search_result.html', {'summoners_result': sum_result, 'solo_tier': solo_tier, 'team_tier': team_tier, 'game_list2': game_list2})
