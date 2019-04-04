@@ -10,6 +10,12 @@ class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     mode = models.IntegerField()
     title = models.CharField(max_length=200)
+    thumbnail_path = ProcessedImageField(
+        upload_to = 'blog/thumbnail/%Y%m%d',
+        processors = [Thumbnail(100, 100)], # 처리할 작업 목룍
+        format = 'JPEG',                    # 최종 저장 포맷
+        options = {'quality': 60},
+        blank=True, null=True)          # 저장 옵션
     content = models.TextField()
     created_date = models.DateTimeField(
             default=timezone.now)

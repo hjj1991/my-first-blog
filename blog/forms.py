@@ -26,14 +26,16 @@ class PostForm(forms.ModelForm):
 
 	class Meta:
 		model = Post
-		fields = ('title', 'content')
+		fields = ('title', 'content', 'thumbnail_path')
 		widgets = {
 			'title': forms.TextInput(attrs={'placeholder': '제목을 입력해주세요.', 'class': 'form-control'}),
 			'content': CKEditorUploadingWidget(),
+			# 'thumbnail_path': forms.FileInput(),
 		}
 		labels ={
 			'title':'',
 			'content':'',
+			# 'thumnail':'',
 		}
 
 

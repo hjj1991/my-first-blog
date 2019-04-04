@@ -28,8 +28,8 @@
     </div>
     <div class="row">
       <div style="float: none; margin: 0 auto" class="col-5 border border-secondary">
-        {% if solo_tier %}
         <div class="row">
+        {% if solo_tier %}
           <div class="col-4">
             <img src="{% static 'images/emblems/Emblem_' %}{{solo_tier.tier}}.png"  width="100%">
           </div>
@@ -41,13 +41,16 @@
         </div>
       </div>
       {% else %}
+      <div>
         배치&전적정보없음
+      </div>
       {% endif %}
       </div>
 
       <div style="float: none; margin: 0 auto" class="col-5 border border-secondary">
-        {% if team_tier %}
         <div class="row">
+
+        {% if team_tier %}
           <div class="col-4">
             <img src="{% static 'images/emblems/Emblem_' %}{{team_tier.tier}}.png"  width="100%">
           </div>
@@ -58,23 +61,18 @@
           전적: {{ team_tier.wins|add:team_tier.losses}}전 {{ team_tier.wins }}승 {{ team_tier.losses }}패
           </div>
           {% else %}
+          <div>
           배치&전적정보없음
+        </div>
           {% endif %}
         </div>
       </div>
       </div>
-          <div class="row">
-            {% for a in game_list2 %}
-            <div class="col-12">
-              <img src="{% static 'images/champ/' %}{{a.champion}}.png"><br>
-            </div>
-            {% endfor %}
-        </div>
     
 </div>
 
 
-</div>
+
 
 
 {% endblock %}
